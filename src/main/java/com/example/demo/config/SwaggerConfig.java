@@ -10,7 +10,6 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 
@@ -46,22 +45,22 @@ public class SwaggerConfig {
                 // swagger 扫描包配置
                 // select()获取Docket中的选择器，返回ApiSelectorBuilder构造选择器，如扫描扫描包的注解
                 .select()
-                /**
-                 * requestHandlerSelectors：请求处理选择器
-                 * basePackage()：扫描指定包下的所有接口
-                 * any()：扫描所有的包
-                 * none()：不扫描
-                 * withClassAnnotation()：扫描指定类上的注解，参数是一个注解的放射对象
-                 * withMethodAnnotation()：扫描方法上的注解
+                /*
+                  requestHandlerSelectors：请求处理选择器
+                  basePackage()：扫描指定包下的所有接口
+                  any()：扫描所有的包
+                  none()：不扫描
+                  withClassAnnotation()：扫描指定类上的注解，参数是一个注解的放射对象
+                  withMethodAnnotation()：扫描方法上的注解
                  */
                 // 指定扫描器扫描的规则（断言）
                 .apis(RequestHandlerSelectors.basePackage("com.example.demo.controller"))
-                /**
-                 * pathSelectors：路径选择器，过滤路径
-                 * ang()：选择所有路径
-                 * none()：都不选择
-                 * ant()：选择指定路径
-                 * regex()：正则表达式
+                /*
+                  pathSelectors：路径选择器，过滤路径
+                  ang()：选择所有路径
+                  none()：都不选择
+                  ant()：选择指定路径
+                  regex()：正则表达式
                  */
                 //PathSelectors.regex("^[+-@=](.*?)")
                 .paths(PathSelectors.any())
@@ -111,9 +110,9 @@ public class SwaggerConfig {
                 // 开源组织
                 "Apache 2.0",
                 // 开源地址
-                "http://www.apache.org/licenses/LICENSE-2.0",
+                "https://www.apache.org/licenses/LICENSE-2.0",
                 // 集合
-                new ArrayList()
+                new ArrayList<>()
         );
     }
 }
