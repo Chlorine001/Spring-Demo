@@ -26,9 +26,21 @@ import java.util.List;
 
 @Tag(name = "程序员", description = "程序员乐园")
 @RestController
-@RequestMapping("/api/programmer")
+@RequestMapping("/api/programmers")
 public class ProgrammerController {
+    @GetMapping("/{id}")
+    public Programmer getProgrammer(@Parameter(description = "程序员id") @PathVariable Integer id) {
+        return new Programmer(1, "id测试用户",35, Arrays.asList("Java,Python,SQL"));
+    }
 
+    @Parameters(value = {
+            @Parameter(name = "name", description = "姓名", in = ParameterIn.PATH),
+            @Parameter(name = "age", description = "年龄", in = ParameterIn.QUERY)
+    })
+    @GetMapping("/{name}")
+    public List<Programmer> getProgrammers(@PathVariable("name") String name, @RequestParam("age") Integer age) {
+        return Arrays.asList(new Programmer(2, "姓名测试用户",35, Arrays.asList("Java,Python,SQL")));
+    }
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "成功",
                     content = {@Content(mediaType = "application/json",
@@ -39,21 +51,7 @@ public class ProgrammerController {
     @Operation(summary = "创建程序员", description = "用于创建一个闷骚的程序员")
     @PostMapping()
     public Programmer createProgrammer(@RequestBody CreateProgrammerRequest request) {
-        return new Programmer(666, "王二狗", request.getAge(), request.getProgrammingLang());
-    }
-
-    @GetMapping("/{id}")
-    public Programmer getProgrammer(@Parameter(description = "程序员id") @PathVariable Integer id) {
-        return new Programmer(002, "id测试用户",35, Arrays.asList("Java,Python,SQL"));
-    }
-
-    @Parameters(value = {
-            @Parameter(name = "name", description = "姓名", in = ParameterIn.PATH),
-            @Parameter(name = "age", description = "年龄", in = ParameterIn.QUERY)
-    })
-    @GetMapping("/{name}")
-    public List<Programmer> getProgrammers(@PathVariable("name") String name, @RequestParam("age") Integer age) {
-        return Arrays.asList(new Programmer(002, "id测试用户",35, Arrays.asList("Java,Python,SQL")));
+        return new Programmer(3, "创建测试用户", request.getAge(), request.getProgrammingLang());
     }
 
 }
