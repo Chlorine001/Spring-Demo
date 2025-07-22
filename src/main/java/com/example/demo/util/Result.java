@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @version 1.0
  * @Author chenglong
  * @className Result
- * @Description
+ * @Description 统一API响应结果封装
  * @Date 2025-07-22
  */
 
