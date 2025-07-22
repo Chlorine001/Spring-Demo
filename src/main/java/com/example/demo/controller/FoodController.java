@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,6 +25,6 @@ public class FoodController {
     @GetMapping("/getFood")
     public List<Food> getFood() {
         // 返回食物列表
-        return List.of(new Food("1", "苹果"), new Food("2", "香蕉"));
+        return Arrays.asList(new Food("1", "苹果"), new Food("2", "香蕉"));
     }
 }
