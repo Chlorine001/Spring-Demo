@@ -1,4 +1,4 @@
-package com.example.demo.util;
+package com.example.demo.util.CodeGenerator;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.extern.slf4j.Slf4j;

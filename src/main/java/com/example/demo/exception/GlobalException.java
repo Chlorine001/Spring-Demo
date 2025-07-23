@@ -1,5 +1,7 @@
-package com.example.demo.util;
+package com.example.demo.exception;
 
+import com.example.demo.util.Result.Result;
+import com.example.demo.util.Result.ResultCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
@@ -22,14 +24,14 @@ import java.net.ConnectException;
  * @Date 2025-07-22
  */
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalException extends RuntimeException {
 
     // 创建日志实例
-    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(GlobalException.class);
 
     private final Environment env;
 
-    public GlobalExceptionHandler(Environment env) {
+    public GlobalException(Environment env) {
         this.env = env;
     }
 

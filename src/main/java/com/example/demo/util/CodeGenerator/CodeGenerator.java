@@ -1,4 +1,4 @@
-package com.example.demo.util;
+package com.example.demo.util.CodeGenerator;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;

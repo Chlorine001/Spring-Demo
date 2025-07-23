@@ -1,4 +1,4 @@
-package com.example.demo.util;
+package com.example.demo.util.Result;
 
 /**
  * @version 1.0

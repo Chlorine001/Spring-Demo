@@ -32,7 +32,7 @@ class MybatisPlusApplicationTests {
         //设置用户名和年龄以及邮箱等属性
         //使用ASSign_UUID主键策略
         user.setName("杨宗纬");
-        user.setNumber(44);
+        user.setNumber("44");
         user.setDescription("yzw123456@qq.com");
 
         //返回受影响的行数(自动帮我们生成Id)
@@ -48,10 +48,10 @@ class MybatisPlusApplicationTests {
         //获取User对象
         User user = new User();
         //设置修改用户的Id
-        user.setId(1);
+        user.setId(1L);
         //设置用户要修改的信息(修改多个属性)
         user.setName("周杰伦");
-        user.setNumber(26);
+        user.setNumber("26");
         user.setDescription("zjl123456@qq.com");
         //通过Id修改用户,并且返回影响行数
         //注意：虽然updateById是通过Id修改信息，但是参数其实是一个对象！
