@@ -1,11 +1,15 @@
 package com.example.demo.util;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
+import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
 
@@ -47,18 +51,20 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/src/main/java");
-        gc.setAuthor("Water");
-        gc.setOpen(false);
+        gc.setOutputDir(projectPath + "/src/main/java");//设置代码生成路径
+        gc.setAuthor("Water");//设置项目作者名称
+        gc.setOpen(false);//是否打开生成目录
+        gc.setIdType(IdType.AUTO);//设置主键策略
+        gc.setDateType(DateType.ONLY_DATE);//设置时间类型
         // 设置名字
         gc.setControllerName("%sController");
-        gc.setServiceName("%sService");
+        gc.setServiceName("%sService");//去掉服务默认前缀
         gc.setServiceImplName("%sServiceImpl");
         gc.setMapperName("%sMapper");
         // 设置 resultMap
-        gc.setBaseResultMap(true);
-        gc.setBaseColumnList(true);
-//        gc.setFileOverride(true);
+        gc.setBaseResultMap(true);//生成基本ResultMap
+        gc.setBaseColumnList(true);//生成基本ColumnList
+        gc.setFileOverride(true);//是否覆盖以前文件
         // gc.setSwagger2(true); 实体属性 Swagger2 注解
         mpg.setGlobalConfig(gc);
 
@@ -82,6 +88,12 @@ public class CodeGenerator {
         PackageConfig pc = new PackageConfig();
         //  pc.setModuleName(scanner("模块名"));
         pc.setParent("com.example.demo");
+//        pc.setMapper("mapper");
+//        pc.setXml("mapper.xml");
+//        pc.setEntity("entity");
+//        pc.setService("service");
+//        pc.setServiceImpl("service.impl");
+//        pc.setController("controller");
         mpg.setPackageInfo(pc);
 
         // 如果模板引擎是 velocity
@@ -101,25 +113,45 @@ public class CodeGenerator {
         cfg.setFileOutConfigList(focList);
         mpg.setCfg(cfg);
 
-        // 配置模板
-        TemplateConfig templateConfig = new TemplateConfig();
-
-        templateConfig.setXml(null);
-        mpg.setTemplate(templateConfig);
+//        // 配置模板
+//        TemplateConfig templateConfig = new TemplateConfig();
+//
+//        templateConfig.setXml(null);
+//        mpg.setTemplate(templateConfig);
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setEntityLombokModel(true);
-        strategy.setRestControllerStyle(true);
+        strategy.setEntityLombokModel(true);//自动lombok
+        strategy.setControllerMappingHyphenStyle(true);
+
+        strategy.setLogicDeleteFieldName("deleted");//设置逻辑删除
+
+        //设置自动填充配置
+        TableFill gmt_create = new TableFill("create_time", FieldFill.INSERT);
+        TableFill gmt_modified = new TableFill("update_time", FieldFill.INSERT_UPDATE);
+        ArrayList<TableFill> tableFills = new ArrayList<>();
+        tableFills.add(gmt_create);
+        tableFills.add(gmt_modified);
+        strategy.setTableFillList(tableFills);
+
+        //乐观锁
+        strategy.setVersionFieldName("version");
+        strategy.setRestControllerStyle(true);//驼峰命名
+
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
-        strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix(pc.getModuleName() + "_");
+        strategy.setTablePrefix(pc.getModuleName() + "_");//设置表名前缀
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new VelocityTemplateEngine());
+
+        //生成代码
         mpg.execute();
     }
+
+
+
+
 }
