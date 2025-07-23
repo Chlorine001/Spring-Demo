@@ -116,7 +116,54 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <!-- 开发环境  -->
+            <id>dev</id>
+            <properties>
+                <profileActive>dev</profileActive>
+            </properties>
+            <!-- 默认激活的环境  -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <!--        <profile>-->
+        <!--            &lt;!&ndash; 测试环境  &ndash;&gt;-->
+        <!--            <id>test</id>-->
+        <!--            <properties>-->
+        <!--                <profileActive>test</profileActive>-->
+        <!--            </properties>-->
+        <!--        </profile>-->
+        <profile>
+            <!-- 生产环境  -->
+            <id>prod</id>
+            <properties>
+                <profileActive>prod</profileActive>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>application-${profileActive}.properties</include>
+                    <include>application.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <!-- SpringBoot打包插件 -->
             <plugin>
