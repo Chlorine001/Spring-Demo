@@ -1,4 +1,5 @@
 package com.example.demo.util;
+
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
@@ -9,7 +10,6 @@ import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
-import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
 
@@ -25,6 +25,9 @@ import java.util.Scanner;
  */
 
 public class CodeGenerator {
+    private static final String URL = "jdbc:mysql://localhost:3306/springtest?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "123456";
     /**
      * <p>
      * 读取控制台内容
@@ -52,10 +55,10 @@ public class CodeGenerator {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
         gc.setOutputDir(projectPath + "/src/main/java");//设置代码生成路径
-        gc.setAuthor("Water");//设置项目作者名称
+        gc.setAuthor("Water-AI");//设置项目作者名称
         gc.setOpen(false);//是否打开生成目录
         gc.setIdType(IdType.AUTO);//设置主键策略
-        gc.setDateType(DateType.ONLY_DATE);//设置时间类型
+//        gc.setDateType(DateType.ONLY_DATE);//设置时间类型
         // 设置名字
         gc.setControllerName("%sController");
         gc.setServiceName("%sService");//去掉服务默认前缀
@@ -70,10 +73,10 @@ public class CodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/springtest?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8");
+        dsc.setUrl(URL);
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("123456");
+        dsc.setUsername(USERNAME);
+        dsc.setPassword(PASSWORD);
         mpg.setDataSource(dsc);
 
         // 自定义配置
@@ -98,6 +101,8 @@ public class CodeGenerator {
 
         // 如果模板引擎是 velocity
         String templatePath = "/templates/mapper.xml.vm";
+//        // 如果模板引擎是 freemarker
+//        String templatePath = "/templates/mapper.xml.ftl";
 
         // 自定义输出配置
         List<FileOutConfig> focList = new ArrayList<>();
@@ -113,20 +118,20 @@ public class CodeGenerator {
         cfg.setFileOutConfigList(focList);
         mpg.setCfg(cfg);
 
-//        // 配置模板
-//        TemplateConfig templateConfig = new TemplateConfig();
+        // 配置模板
+        TemplateConfig templateConfig = new TemplateConfig();
 //
-//        templateConfig.setXml(null);
-//        mpg.setTemplate(templateConfig);
+        templateConfig.setXml(null);
+        mpg.setTemplate(templateConfig);
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         strategy.setEntityLombokModel(true);//自动lombok
-        strategy.setControllerMappingHyphenStyle(true);
+        strategy.setRestControllerStyle(true);//驼峰命名
 
-        strategy.setLogicDeleteFieldName("deleted");//设置逻辑删除
+        strategy.setLogicDeleteFieldName("is_deleted");//设置逻辑删除
 
         //设置自动填充配置
         TableFill gmt_create = new TableFill("create_time", FieldFill.INSERT);
@@ -138,12 +143,13 @@ public class CodeGenerator {
 
         //乐观锁
         strategy.setVersionFieldName("version");
-        strategy.setRestControllerStyle(true);//驼峰命名
-
+        // 公共父类
+//        strategy.setSuperControllerClass(Public.class);
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
         strategy.setTablePrefix(pc.getModuleName() + "_");//设置表名前缀
+        strategy.setControllerMappingHyphenStyle(true);
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new VelocityTemplateEngine());
 
