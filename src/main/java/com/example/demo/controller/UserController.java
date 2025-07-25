@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author Water-AI
- * @since 2025-07-23
+ * @since 2025-07-25
  */
 @RestController
 @RequestMapping("/user")

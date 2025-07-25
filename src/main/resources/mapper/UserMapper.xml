@@ -7,6 +7,8 @@
         <id column="id" property="id" />
         <result column="name" property="name" />
         <result column="number" property="number" />
+        <result column="phone" property="phone" />
+        <result column="email" property="email" />
         <result column="description" property="description" />
         <result column="is_deleted" property="isDeleted" />
         <result column="create_time" property="createTime" />
@@ -19,7 +21,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, number, description, is_deleted, create_time, update_by, is_disabled, create_by, update_time, version
+        id, name, number, phone, email, description, is_deleted, create_time, update_by, is_disabled, create_by, update_time, version
     </sql>
 
 </mapper>

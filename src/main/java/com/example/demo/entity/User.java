@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author Water-AI
- * @since 2025-07-23
+ * @since 2025-07-25
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -27,6 +27,10 @@ public class User implements Serializable {
     private String name;
 
     private String number;
+
+    private String phone;
+
+    private String email;
 
     private String description;
 

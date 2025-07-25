@@ -9,7 +9,7 @@ import com.example.demo.entity.User;
  * </p>
  *
  * @author Water-AI
- * @since 2025-07-23
+ * @since 2025-07-25
  */
 public interface UserService extends IService<User> {
 
