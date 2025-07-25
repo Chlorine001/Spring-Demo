@@ -13,7 +13,7 @@ import java.util.*;
  * @Description
  * @Date 2025-07-25
  */
-public class JWTUtil {
+public class JwtUtil {
     // TOKEN的有效期一小时（ms）
     private static final int TOKEN_TIME_OUT = 3_600;
     // 加密KEY
@@ -40,7 +40,7 @@ public class JWTUtil {
     }
 
     //解析token
-    public static Claims parseJwt(String token){
+    public static Claims parseJWT(String token){
         Claims claims;
         try {
             claims = Jwts.parser()
@@ -105,12 +105,12 @@ public class JWTUtil {
     }
 
     public static void main(String[] args) {
-        String token = JWTUtil.getToken(1102L);
+        String token = JwtUtil.getToken(1102L);
 //        System.out.println(token);
-        Claims claims = JWTUtil.parseJwt(token);
+        Claims claims = JwtUtil.parseJWT(token);
         //2024.10.9的一个token
 //        Claims claims = JWTUtil.parseJwt("eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAA_zWLSQrDMAwA_6JzDF7kJfmNgmXiQMAgB1pK_17l0NsMw3zgnB02wJrD2gobXFsyaFsx1Kw30VcX9siJU4AFOk3YXPYFrXM-LiD3rre8ZfL1dBHVg_tFanRXNRpDmV_jf2J-zq4tfn-EHnvSgAAAAA.JIjyu9IPQE3ABX3_6YUJHfaPXDBxzCYze2T5yF7nIvOuAZyFurTi_Ii441w_0e5luoGQacyMjdWVs8xpZ7koog");
-        switch (JWTUtil.verifyToken(claims)) {
+        switch (JwtUtil.verifyToken(claims)) {
             case -2:
                 System.out.println("claim为空");
                 break;
