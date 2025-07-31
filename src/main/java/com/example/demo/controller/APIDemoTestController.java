@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description 一个简单api接口
  * @Date 2025-07-17
  */
-@RequestMapping("/admin/test")
+@RequestMapping("/test/v1")
 @RestController
 public class APIDemoTestController {
     @GetMapping("/get")
