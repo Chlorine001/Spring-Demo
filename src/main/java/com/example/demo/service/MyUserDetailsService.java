@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.security.MyUserDetails;
+import com.example.demo.util.Encrypt.MyPasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,13 +17,16 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MyUserDetailsService implements UserDetailsService {
+    @Autowired
+    MyPasswordEncoder myPasswordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 假设这个MyUserDetails是我们从数据库中查出来的
         MyUserDetails myUserDetails = new MyUserDetails();
         myUserDetails.setUsername("user");
-        myUserDetails.setPassword("123456");
+        String encodePassword = myPasswordEncoder.encode("123456");
+        myUserDetails.setPassword(encodePassword);
         return myUserDetails;
     }
 }
