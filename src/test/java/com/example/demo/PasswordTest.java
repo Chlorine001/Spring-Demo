@@ -3,7 +3,7 @@ package com.example.demo;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.util.Encrypt.RSAUtil;
 import com.example.demo.util.Encrypt.SecurityUtil;
-import com.example.demo.util.Password;
+import com.example.demo.util.Encrypt.entity.Password;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
