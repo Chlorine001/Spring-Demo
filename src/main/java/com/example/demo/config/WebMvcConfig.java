@@ -6,6 +6,7 @@ import com.example.demo.util.Result.Result;
 import com.example.demo.util.Result.ResultCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +24,9 @@ import java.util.List;
  * @Description
  * @Date 2025-07-23
  */
+//开启基于方法的安全认证机制，也就是说在web层的controller启用注解机制的安全确认
+//Spring Security默认是禁用注解的，要想开启注解，需要在继承WebSecurityConfigurerAdapter的类上加@EnableGlobalMethodSecurity注解，来判断用户对某个控制层的方法是否具有访问权限
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebMvcConfig implements WebMvcConfigurer {
 
     private final Logger logger = LoggerFactory.getLogger(WebMvcConfigurer.class);
