@@ -52,4 +52,12 @@ public class OpenApiDocConfig {
                 .build();
     }
 
+    @Bean
+    public GroupedOpenApi testApi() {
+        return GroupedOpenApi.builder()
+                .group("test")
+                .pathsToMatch("/test/**")
+                .build();
+    }
+
 }
