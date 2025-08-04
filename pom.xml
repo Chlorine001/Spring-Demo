@@ -55,22 +55,6 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.6.14</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springdoc</groupId>-->
-<!--            <artifactId>springdoc-openapi-starter-webflux-api</artifactId>-->
-<!--            <version>2.8.9</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springdoc</groupId>-->
-<!--            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>-->
-<!--            <version>2.8.9</version>-->
-<!--        </dependency>-->
-        <!--swagger3 ui 界面 个人喜好-->
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-springdoc-ui</artifactId>
-            <version>2.0.9</version>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

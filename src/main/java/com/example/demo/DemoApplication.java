@@ -36,13 +36,10 @@ public class DemoApplication {
         String contextPath = env.getProperty("server.servlet.context-path");
         String hostAddress = "localhost";
         String swaggerPath = "";
-        String knife4jPath = "";
         if (StringUtils.isBlank(contextPath)) {
             swaggerPath = "/swagger-ui";
-            knife4jPath = "/doc.html";
         } else {
             swaggerPath = contextPath + "/swagger-ui";
-            knife4jPath = contextPath + "/doc.html";
         }
         try {
             hostAddress = InetAddress.getLocalHost().getHostAddress();
@@ -56,9 +53,6 @@ public class DemoApplication {
                             "\t\tswagger接口文档访问 URL:\n" +
                             "\t\t\t本地: {}://localhost:{}{}\n" +
                             "\t\t\t外部: {}://{}:{}{}\n" +
-                            "\t\tknife4j接口文档访问 URL:\n" +
-                            "\t\t\t本地: {}://localhost:{}{}\n" +
-                            "\t\t\t外部: {}://{}:{}{}\n" +
                             "----------------------------------------------------------"),
                     env.getProperty("spring.application.name"),
                     env.getActiveProfiles(),
@@ -68,14 +62,7 @@ public class DemoApplication {
                     protocol,
                     hostAddress,
                     serverPort,
-                    swaggerPath,
-                    protocol,
-                    serverPort,
-                    knife4jPath,
-                    protocol,
-                    hostAddress,
-                    serverPort,
-                    knife4jPath);
+                    swaggerPath);
         }
     }
 
